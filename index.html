@@ -38,54 +38,28 @@
                 var model2 = document.querySelector("#model2");
 
                 var model3 = document.querySelector("#model3");
-
-
-
                 marker1.addEventListener('markerFound', function () {
-
                     if (marker2.object3D.visible) {
-
                         model3.setAttribute('visible', 'true');
-
                     } else {
-
-                        model1.setAttribute('visible', 'true');
-
+               model1.setAttribute('visible', 'true');
                     }
-
                 });
-
                 marker1.addEventListener('markerLost', function () {
-
-                    if (!marker2.object3D.visible) {
-
+               if (!marker2.object3D.visible) {
                         model1.setAttribute('visible', 'false');
-
                     }
-
                 });
-
-
-
                 marker2.addEventListener('markerFound', function () {
-
                     if (marker1.object3D.visible) {
-
                         model3.setAttribute('visible', 'true');
-
                     } else {
-
                         model2.setAttribute('visible', 'true');
-
                     }
-
                 });
-
                 marker2.addEventListener('markerLost', function () {
-
-                    if (!marker1.object3D.visible) {
-			    
-                        model2.setAttribute('visible', 'false');
+                    if (!marker1.object3D.visible) {	    
+                 model2.setAttribute('visible', 'false');
                     }
                 });
             }
