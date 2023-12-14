@@ -7,17 +7,17 @@
 <body>
     <a-scene embedded arjs="sourceType: webcam;">
         <!-- マーカー1 -->
-        <a-marker id="marker1" preset="custom" type="pattern" url="path/to/marker1.patt">
+        <a-marker id="marker1" preset="custom" type="pattern" url="marker1.patt">
             <!-- 3Dモデル1の表示 -->
-            <a-entity id="model1" gltf-model="url(path/to/model1.gltf)" scale="0.1 0.1 0.1" visible="false"></a-entity>
+            <a-entity id="model1" gltf-model="model1.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
         </a-marker>
         <!-- マーカー2 -->
-        <a-marker id="marker2" preset="custom" type="pattern" url="path/to/marker2.patt">
+        <a-marker id="marker2" preset="custom" type="pattern" url="marker2.patt">
             <!-- 3Dモデル2の表示 -->
-            <a-entity id="model2" gltf-model="url(path/to/model2.gltf)" scale="0.1 0.1 0.1" visible="false"></a-entity>
+            <a-entity id="model2" gltf-model="model2.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
         </a-marker>
         <!-- 同時に2つのマーカーが検出された場合に表示するモデル -->
-        <a-entity id="model3" gltf-model="url(path/to/model3.gltf)" scale="0.1 0.1 0.1" visible="false"></a-entity>
+        <a-entity id="model3" gltf-model="model3.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
     </a-scene>
     <script>
         AFRAME.registerComponent('ar-marker-controller', {
