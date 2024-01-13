@@ -1,72 +1,28 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8" />
-	 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	 <!-- A-Frame を読み込む -->
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <!-- AR.js を読み込む -->
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
-<body>
-    <!-- A-FrameにAR.jsを紐づけ、VRボタン非表示、深度バッファ追加 -->
-    <a-scene embedded arjs vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;">
-    <a-scene embedded arjs="sourceType: webcam;">
-        <!-- マーカー1 -->
-        <a-marker id="marker1" preset="custom" type="pattern" url="marker1.patt">
-            <!-- 3Dモデル1の表示 -->
-            <a-entity id="model1" gltf-model="model1.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
-        </a-marker>
-        <!-- マーカー2 -->
-        <a-marker id="marker2" preset="custom" type="pattern" url="marker2.patt">
-            <!-- 3Dモデル2の表示 -->
-            <a-entity id="model2" gltf-model="model2.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
-        </a-marker>
-        <!-- 同時に2つのマーカーが検出された場合に表示するモデル -->
-        <a-entity id="model3" gltf-model="model3.glb" scale="0.1 0.1 0.1" visible="false"></a-entity>
-    </a-scene>
-    <script>
-        AFRAME.registerComponent('ar-marker-controller', {
-            init: function () {
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>A-Frame で超簡単 AR</title>
+  </head>
+  <body style="margin:0px; overflow:hidden;">
+    <!-- A-Frame ライブラリの読み込み -->
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <!-- AR.js ライブラリの読み込み -->
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 
-                var marker1 = document.querySelector("#marker1");
+    <!-- A-Frame の VR空間に AR.js を紐づける（デバッグUIは非表示） -->
+    <a-scene embedded arjs="debugUIEnabled:false;">
 
-                var marker2 = document.querySelector("#marker2");
+      <!-- マーカーを登録（プリセットされている「hiro」マーカー） -->
+      <a-marker preset="hiro">
+        <!-- マーカーの場所に箱を置く（見やすいようにワイヤーフレーム表示） -->
+        <a-box position="0 0.5 0" wireframe="true"></a-box>
+      </a-marker>
 
-                var model1 = document.querySelector("#model1");
-
-                var model2 = document.querySelector("#model2");
-
-                var model3 = document.querySelector("#model3");
-                marker1.addEventListener('markerFound', function () {
-                    if (marker2.object3D.visible) {
-                        model3.setAttribute('visible', 'true');
-                    } else {
-               model1.setAttribute('visible', 'true');
-                    }
-                });
-                marker1.addEventListener('markerLost', function () {
-               if (!marker2.object3D.visible) {
-                        model1.setAttribute('visible', 'false');
-                    }
-                });
-                marker2.addEventListener('markerFound', function () {
-                    if (marker1.object3D.visible) {
-                        model3.setAttribute('visible', 'true');
-                    } else {
-                        model2.setAttribute('visible', 'true');
-                    }
-                });
-                marker2.addEventListener('markerLost', function () {
-                    if (!marker1.object3D.visible) {	    
-                 model2.setAttribute('visible', 'false');
-                    }
-                });
-            }
-        });
-    </script>
-    <a-entity ar-marker-controller></a-entity>
-	  <!-- カメラを追加 -->
+      <!-- AR用のカメラを置く -->
       <a-entity camera></a-entity>
-</body>
+
+    </a-scene>
+  </body>
 </html>
